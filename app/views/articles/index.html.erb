@@ -1,13 +1,28 @@
-<h1>Articles listing page</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th colspan = '3'>Actions</th>
-    </tr>
-    </thead>
-
+<!--<img src="/assets/articles_page.jpg" class="bg" alt="">-->
+<h1 class="text-center mt-4">BLOGS</h1>
+<div class="container">
+    <% @articles.each do |article| %>
+        <div class="row justify-content-md-center">
+            <div class="col-5 mt-4">
+                <div class="card text-center shadow mb-5 bg-white rounder">
+                    <div class="card-header"><i>by Kartikay Kala</i></div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
+                    <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+                    <!--<a href="#" class="btn btn-outline-success">View</a>-->
+                    <%=  link_to 'View', article_path(article), class: "btn btn-outline-success" %>
+                    <!--<a href="#" class="btn btn-outline-info">Edit</a>-->
+                    <%=  link_to 'Edit', edit_article_path(article), class: "btn btn-outline-info" %>
+                    <!--<a href="#" class="btn btn-outline-danger">Delete</a>-->
+                    <%=  link_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+                </div>
+                <div class="card-footer text-muted"><small>Created <%= time_ago_in_words(article.created_at) %> ago, edited <%= time_ago_in_words(article.updated_at) %> ago</small></div>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+<!--
     <tbody>
         <% @articles.each do |article| %>
             <tr>
@@ -23,3 +38,4 @@
 <p>
     <%= link_to 'Create new article', new_article_path%> | <%= link_to 'Home page', root_path %>
 </p>
+-->
